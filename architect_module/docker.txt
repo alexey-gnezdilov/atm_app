@@ -1,0 +1,4 @@
++968888888888CONTAINER ID   IMAGE      COMMAND                  CREATED       STATUS         PORTS                    NAMES
+
+
+7620738b71c2   postgres   "docker-entrypoint.s…"   8 weeks ago   Up 2 minutes   0.0.0.0:5460->5432/tcp   atm_app-atm_db-1

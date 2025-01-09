@@ -1,0 +1,17 @@
+{
+    "action" : "create",
+    "tableName" : "test_table",
+    "columnNames" : {
+        "id": "int",
+      "name": "varchar"
+    }
+}
+
+========================================================================
+
+1) Запустить docker desktop
+2) sudo ln -s $HOME/.docker/desktop/docker.sock /var/run/docker.sock
+
+docker context ls
+
+В Intellij IDEA -> Settings -> Docker -> TCP Socket -> unix:///home/alexey/.docker/desktop/docker.sock
