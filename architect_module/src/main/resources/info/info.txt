@@ -15,3 +15,13 @@
 docker context ls
 
 В Intellij IDEA -> Settings -> Docker -> TCP Socket -> unix:///home/alexey/.docker/desktop/docker.sock
+
+========================================================================
+
+String command = "echo password | sudo -S docker ps > architect_module/docker.txt";
+ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+ProcessBuilder pb = new ProcessBuilder("sh", "-c", command);
+ProcessBuilder pb = new ProcessBuilder(
+                "sh",
+                "-c",
+                "docker ps > architect_module/src/main/resources/dump/docker.txt");

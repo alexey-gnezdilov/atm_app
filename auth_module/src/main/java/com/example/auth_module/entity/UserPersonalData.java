@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 
-import static com.example.auth_module.constant.Constants.USER_PERSONAL_DATA_SEQUENCE;
-import static com.example.auth_module.constant.Constants.USER_PERSONAL_DATA_SEQUENCE_NAME;
+import static com.example.auth_module.constant.Constants.*;
 
 @Entity
 @NoArgsConstructor
@@ -20,14 +19,14 @@ public class UserPersonalData {
     @Id
     @SequenceGenerator(name = USER_PERSONAL_DATA_SEQUENCE, sequenceName = USER_PERSONAL_DATA_SEQUENCE_NAME, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = USER_PERSONAL_DATA_SEQUENCE)
-    @Column(name = "id")
+    @Column(name = ID_COLUMN)
     private Long id;
     private String login;
     private String password;
     private String email;
     private String token;
 
-    @Value(value = "false")
+    @Value(value = EMAIL_VERIFICATION_DEFAULT)
     private boolean emailVerification;
 
     private LocalDateTime registrationDate;

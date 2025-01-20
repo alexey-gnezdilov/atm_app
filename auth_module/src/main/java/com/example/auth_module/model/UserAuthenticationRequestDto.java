@@ -3,7 +3,7 @@ package com.example.auth_module.model;
 import lombok.Data;
 
 @Data
-public class UserAuthorizationRequestDto {
+public class UserAuthenticationRequestDto {
 
     private String login;
     private String password;

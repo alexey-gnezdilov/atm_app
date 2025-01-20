@@ -6,6 +6,8 @@ import org.example.rent_module.repository.UserCriteriaDaoRepository;
 import org.example.rent_module.service.CheckTokenSessionService;
 import org.springframework.stereotype.Service;
 
+import static org.example.rent_module.constants.RentApartmentConstants.NO_SUCH_USER_WITH_GIVEN_TOKEN_MESSAGE;
+
 @Service
 @RequiredArgsConstructor
 public class CheckTokenSessionServiceImpl implements CheckTokenSessionService {
@@ -16,7 +18,7 @@ public class CheckTokenSessionServiceImpl implements CheckTokenSessionService {
     public UserPersonalData checkToken(String token) {
         UserPersonalData user = userCriteriaDaoRepository.findByToken(token);
         if (user == null) {
-            throw new RuntimeException("Ввойдите в систему");
+            throw new RuntimeException(NO_SUCH_USER_WITH_GIVEN_TOKEN_MESSAGE);
         }
         return user;
     }

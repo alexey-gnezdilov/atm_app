@@ -1,39 +1,39 @@
 package org.example.rent_module.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.rent_module.annotation.Default;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
+import static org.example.rent_module.constants.RentApartmentConstants.*;
 
 @Entity
-@Table(name = "address_info")
+@Table(name = ADDRESS_INFO)
 @NoArgsConstructor
 @Getter
 @Setter
 public class AddressInfo {
 
     @Id
-    @SequenceGenerator(name = "address_infoSequence", sequenceName = "address_info_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_infoSequence")
-    @Column(name = "id")
+    @SequenceGenerator(name = ADDRESS_INFO_SEQUENCE, sequenceName = ADDRESS_INFO_SEQUENCE_NAME, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ADDRESS_INFO_SEQUENCE)
+    @Column(name = ID_COLUMN)
     private Long id;
+
     private String city;
     private String street;
 
-    @Column(name = "house_number")
+    @Column(name = HOUSE_NUMBER_COLUMN)
     private String houseNumber;
 
-    @Column(name = "registration_date")
+    @Column(name = REGISTRATION_DATE_COLUMN)
     private LocalDateTime registrationDate;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "apartment_id")
+    @JoinColumn(name = APARTMENT_ID)
     private ApartmentInfo apartmentInfo;
 
     @Default

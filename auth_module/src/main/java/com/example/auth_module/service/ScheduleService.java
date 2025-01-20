@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.example.auth_module.constant.Constants.*;
+
 @EnableScheduling
 @Service
 @RequiredArgsConstructor
@@ -23,21 +25,21 @@ public class ScheduleService {
 
     @Scheduled(fixedDelay = 1800000L)
     private void checkTokenSession() {
-        log.info("Планировщик начал работу " + LocalDateTime.now());
+        log.info(START + LocalDateTime.now());
         List<UserPersonalData> users = userRepository.findUserPersonalDataByTokenIsNotNull();
         if (users.isEmpty()) {
-            log.error("Нет текущих сессий.");
+            log.error(NO_CURRENT_SESSIONS);
         } else {
             for (UserPersonalData user : users) {
                 String token = user.getToken();
-                LocalDateTime tokenDate = LocalDateTime.parse(token.substring(token.indexOf("|") + 1));
+                LocalDateTime tokenDate = LocalDateTime.parse(token.substring(token.indexOf(DELIMITER) + 1));
                 if (tokenDate.isBefore(LocalDateTime.now())) {
                     user.setToken(null);
-                    log.info("Токен пользователя " + user.getLogin() + " просрочен и был удалён.");
+                    log.info(USER_TOKEN + user.getLogin() + TOKEN_EXPIRED);
                 }
                 userRepository.save(user);
             }
-            log.info("Планировщик завершил работу в " + LocalDateTime.now());
+            log.info(FINISH + LocalDateTime.now());
         }
     }
 }

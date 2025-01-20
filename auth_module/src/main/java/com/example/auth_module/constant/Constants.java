@@ -7,7 +7,7 @@ public class Constants {
      */
     public static final String BASE_URL = "/auth";
     public static final String USER_REGISTRATION_URL = BASE_URL + "/registration";
-    public static final String USER_AUTHORIZATION_URL = BASE_URL + "/authorization";
+    public static final String USER_AUTHENTICATION_URL = BASE_URL + "/authentication";
 
     /**
      * Exception constants.
@@ -37,14 +37,26 @@ public class Constants {
     public static final String RESULT = "result";
 
     /**
-     * Model constants
+     * Entity constants
      */
     public static final String USER_PERSONAL_DATA_SEQUENCE = "user_personal_dataSequence";
     public static final String USER_PERSONAL_DATA_SEQUENCE_NAME = "user_personal_data_sequence";
+    public static final String ID_COLUMN = "id";
+    public static final String EMAIL_VERIFICATION_DEFAULT = "false";
 
     /**
      * Repository constants
      */
     public static final String FIND_USER_PERSONAL_DATA_BY_LOGIN = "select u from UserPersonalData u where u.login = :login";
+
+    /**
+     * ScheduleService constants
+     */
+    public static final String START = "Планировщик начал работу ";
+    public static final String FINISH = "Планировщик завершил работу в ";
+    public static final String NO_CURRENT_SESSIONS = "Нет текущих сессий.";
+    public static final String DELIMITER = "|";
+    public static final String USER_TOKEN = "Токен пользователя ";
+    public static final String TOKEN_EXPIRED = " просрочен и был удалён.";
 
 }

@@ -2,31 +2,31 @@ package org.example.rent_module.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.rent_module.entity.IntegrationInfo;
+import org.example.rent_module.model.BookingInfoForProductDto;
 import org.example.rent_module.model.LatitudeAndLongitudeDto;
 import org.example.rent_module.model.geo_response.GeoResponse;
 import org.example.rent_module.repository.IntegrationInfoRepository;
 import org.example.rent_module.service.IntegrationService;
 import org.example.rent_module.util.Base64EncodeDecode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
+import static org.example.rent_module.constants.RentApartmentConstants.GEO;
+import static org.example.rent_module.constants.RentApartmentConstants.KEY;
 
 @Service
 @RequiredArgsConstructor
 public class IntegrationServiceImpl implements IntegrationService {
 
-    private static final String GEO = "GEO";
+    @Value("${integration.key}")
+    private String INTEGRATION_KEY;
 
     private final RestTemplate restTemplate;
     private final IntegrationInfoRepository infoRepository;
-
-//    public IntegrationServiceImpl(RestTemplate restTemplate) {
-//        this.restTemplate = restTemplate;
-//    }
 
     @Override
     public String requestToProductModule() {
@@ -48,9 +48,19 @@ public class IntegrationServiceImpl implements IntegrationService {
         ).getBody();
     }
 
+    @Override
+    public String requestToProductModuleForDiscount(BookingInfoForProductDto info) {
+        return restTemplate.exchange(
+                "http://localhost:8084/get_discount",
+                HttpMethod.POST,
+                new HttpEntity<>(info,buildHeadersToRequest()),
+                String.class
+        ).getBody();
+    }
+
     private HttpHeaders buildHeadersToRequest(){
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("token", "testToken");
+        httpHeaders.set(KEY, INTEGRATION_KEY);
         return httpHeaders;
     }
 

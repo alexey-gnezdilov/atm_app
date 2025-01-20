@@ -7,6 +7,7 @@ import java.util.Map;
 public interface ArchitectService {
 
     void executeAction(ActionInDbRequest request);
+    void backup();
     void launchCreateTableCommand(ActionInDbRequest request);
     String generateCreateScript(String tableName, Map<String, String> columnNames);
 

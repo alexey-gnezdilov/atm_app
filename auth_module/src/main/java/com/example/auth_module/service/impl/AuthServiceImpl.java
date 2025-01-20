@@ -2,7 +2,7 @@ package com.example.auth_module.service.impl;
 
 import com.example.auth_module.entity.UserPersonalData;
 import com.example.auth_module.exception.UserExistsException;
-import com.example.auth_module.model.UserAuthorizationRequestDto;
+import com.example.auth_module.model.UserAuthenticationRequestDto;
 import com.example.auth_module.model.UserRegistrationRequestDto;
 import com.example.auth_module.model.UserRegistrationResponseDto;
 import com.example.auth_module.repository.UserRepository;
@@ -34,16 +34,8 @@ public class AuthServiceImpl implements AuthService {
         return prepareResponseDto(userRepository.save(prepareUserForDb(user)));
     }
 
-    private UserRegistrationResponseDto prepareResponseDto(UserPersonalData user) {
-        return new UserRegistrationResponseDto(
-                USER_REGISTRATION_SUCCESS,
-                user.getLogin(),
-                user.getRegistrationDate()
-        );
-    }
-
     @Override
-    public String userAuthorization(UserAuthorizationRequestDto user) {
+    public String userAuthentication(UserAuthenticationRequestDto user) {
         UserPersonalData userPersonalData = userRepository.findByLogin(user.getLogin())
                 .orElseThrow(() -> new UserExistsException(INCORRECT_USER, CODE_605));
         if (!decoder(userPersonalData.getPassword()).equals(user.getPassword())){
@@ -52,6 +44,14 @@ public class AuthServiceImpl implements AuthService {
         userPersonalData.setToken(TokenUtils.generateToken());
         userRepository.save(userPersonalData);
         return USER_AUTHORIZATION_SUCCESS;
+    }
+
+    private UserRegistrationResponseDto prepareResponseDto(UserPersonalData user) {
+        return new UserRegistrationResponseDto(
+                USER_REGISTRATION_SUCCESS,
+                user.getLogin(),
+                user.getRegistrationDate()
+        );
     }
 
     private UserPersonalData prepareUserForDb(UserRegistrationRequestDto user) {

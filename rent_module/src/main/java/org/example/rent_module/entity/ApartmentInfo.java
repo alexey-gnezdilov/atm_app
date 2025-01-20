@@ -6,35 +6,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.rent_module.annotation.Default;
 
+import static org.example.rent_module.constants.RentApartmentConstants.*;
+
 @Entity
-@Table(name = "apartment_info")
+@Table(name = APARTMENT_INFO)
 @NoArgsConstructor
 @Getter
 @Setter
 public class ApartmentInfo {
 
     @Id
-    @SequenceGenerator(name = "apartment_infoSequence", sequenceName = "apartment_info_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "apartment_infoSequence")
-    @Column(name = "id")
+    @SequenceGenerator(name = APARTMENT_INFO_SEQUENCE, sequenceName = APARTMENT_INFO_SEQUENCE_NAME, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = APARTMENT_INFO_SEQUENCE)
+    @Column(name = ID_COLUMN)
     private Long id;
 
-    @Column(name = "rooms_count")
+    @Column(name = ROOMS_COUNT_COLUMN)
     private String roomsCount;
+
     private String price;
     private String availability;
 
-    @OneToOne(mappedBy = "apartmentInfo")
+    @OneToOne(mappedBy = APARTMENT_INFO_MAPPING)
     private AddressInfo addressInfo;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "file_id")
+    @JoinColumn(name = FILE_ID)
     private ApartmentAttachment file;
 
     @Default
     public ApartmentInfo(String roomsCount, String price) {
         this.roomsCount = roomsCount;
         this.price = price;
-        this.availability = "false";
+        this.availability = DEFAULT_AVAILABILITY;
     }
 }

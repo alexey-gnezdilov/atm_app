@@ -1,6 +1,7 @@
 package org.example.rent_module.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.rent_module.model.BookingRequestApartmentFullInfoDto;
 import org.example.rent_module.model.LatitudeAndLongitudeDto;
 import org.example.rent_module.model.RentApartmentFullInfoDto;
 import org.example.rent_module.service.CheckTokenSessionService;
@@ -8,6 +9,7 @@ import org.example.rent_module.service.RentService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.example.rent_module.constants.RentApartmentConstants.*;
@@ -29,8 +31,18 @@ public class RentController {
     }
 
     @GetMapping(CHOOSE_DISCOUNT_URL)
-    public String chooseDiscount(String idRent){
-        return rentService.chooseDiscount(idRent);
+    public BookingRequestApartmentFullInfoDto bookApartment(
+            @RequestHeader(required = false) String token,
+            @RequestParam Long idApartment,
+            @RequestParam(required = false) LocalDateTime start,
+            @RequestParam(required = false) LocalDateTime end) {
+
+        return rentService.bookApartment(token, idApartment, start, end);
+    }
+
+    @GetMapping("/getTime")
+    public LocalDateTime getCurrentDateTime() {
+        return LocalDateTime.now();
     }
 
 

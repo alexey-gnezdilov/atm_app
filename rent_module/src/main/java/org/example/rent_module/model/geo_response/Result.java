@@ -5,11 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import static org.example.rent_module.constants.RentApartmentConstants.COMPONENTS;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
 
-    @JsonProperty(value = "components")
+    @JsonProperty(value = COMPONENTS)
     private Component component;
 }

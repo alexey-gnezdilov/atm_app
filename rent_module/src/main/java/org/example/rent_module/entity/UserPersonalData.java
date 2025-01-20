@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 
+import static org.example.rent_module.constants.RentApartmentConstants.*;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -15,16 +17,17 @@ import java.time.LocalDateTime;
 public class UserPersonalData {
 
     @Id
-    @SequenceGenerator(name = "user_personal_dataSequence", sequenceName = "user_personal_data_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_personal_dataSequence")
-    @Column(name = "id")
+    @SequenceGenerator(name = USER_PERSONAL_SEQUENCE, sequenceName = USER_PERSONAL_SEQUENCE_NAME, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = USER_PERSONAL_SEQUENCE)
+    @Column(name = ID_COLUMN)
     private Long id;
+
     private String login;
     private String password;
     private String email;
     private String token;
 
-    @Value(value = "false")
+    @Value(value = DEFAULT_EMAIL_VERIFICATION)
     private boolean emailVerification;
 
     private LocalDateTime registrationDate;

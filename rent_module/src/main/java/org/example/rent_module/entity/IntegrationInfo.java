@@ -8,8 +8,10 @@ import org.example.rent_module.annotation.Default;
 
 import java.time.LocalDateTime;
 
+import static org.example.rent_module.constants.RentApartmentConstants.INTEGRATION_INFO;
+
 @Entity
-@Table(name = "integration_info")
+@Table(name = INTEGRATION_INFO)
 @NoArgsConstructor
 @Getter
 @Setter
