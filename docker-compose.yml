@@ -1,12 +1,12 @@
 version: "3.9"
 
 services:
-  atm_db:
+  rent_apartment_db:
     image: postgres
-    container_name: my_atm_app
+    container_name: rent_apartment_app
     restart: always
     environment:
-      - POSTGRES_DB=atm_credit_db
+      - POSTGRES_DB=rent_apartment_db
       - POSTGRES_USER=alexey
       - POSTGRES_PASSWORD=alexey
     volumes:

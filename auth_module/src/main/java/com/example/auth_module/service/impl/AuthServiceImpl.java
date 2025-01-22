@@ -2,11 +2,13 @@ package com.example.auth_module.service.impl;
 
 import com.example.auth_module.entity.UserPersonalData;
 import com.example.auth_module.exception.UserExistsException;
+import com.example.auth_module.model.ConfirmRegistrationDto;
 import com.example.auth_module.model.UserAuthenticationRequestDto;
 import com.example.auth_module.model.UserRegistrationRequestDto;
 import com.example.auth_module.model.UserRegistrationResponseDto;
 import com.example.auth_module.repository.UserRepository;
 import com.example.auth_module.service.AuthService;
+import com.example.auth_module.service.IntegrationService;
 import com.example.auth_module.util.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import static com.example.auth_module.util.Base64EncodeDecode.encoder;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final IntegrationService integrationService;
 
     @Override
     public UserRegistrationResponseDto userRegistration(UserRegistrationRequestDto user) {
@@ -31,7 +34,17 @@ public class AuthServiceImpl implements AuthService {
             throw new UserExistsException(NOT_UNIQUE_EMAIL, CODE_603);
         }
 
-        return prepareResponseDto(userRepository.save(prepareUserForDb(user)));
+        UserPersonalData userToSave = userRepository.save(prepareUserForDb(user));
+
+        integrationService.sendConfirmationMessage(
+                ConfirmRegistrationDto.builder()
+                        .toEmail(user.getEmail())
+                        .subject(CONFIRMATION_REGISTRATION_SUBJECT)
+                        .body(CONFIRMATION_BODY_MESSAGE + user.getEmail())
+                        .build()
+        );
+
+        return prepareResponseDto(userToSave);
     }
 
     @Override

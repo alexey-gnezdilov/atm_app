@@ -5,12 +5,9 @@ import com.example.auth_module.model.UserRegistrationRequestDto;
 import com.example.auth_module.model.UserRegistrationResponseDto;
 import com.example.auth_module.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static com.example.auth_module.constant.Constants.USER_AUTHENTICATION_URL;
-import static com.example.auth_module.constant.Constants.USER_REGISTRATION_URL;
+import static com.example.auth_module.constant.Constants.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +23,12 @@ public class AuthController {
     @PostMapping(USER_AUTHENTICATION_URL)
     public String userAuthorization(@RequestBody UserAuthenticationRequestDto user) {
         return authService.userAuthentication(user);
+    }
+
+    @GetMapping(CONFIRMATION_OF_REGISTRATION_URL)
+    public String confirmUserRegistration(@RequestParam(value = "user_email") String userEmail) {
+        String str = userEmail;
+        return "SUCCESS REGISTRATION";
     }
 
 }

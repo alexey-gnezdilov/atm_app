@@ -1,5 +1,6 @@
 package com.example.email_sender.service.impl;
 
+import com.example.email_sender.model.ConfirmRegistrationDto;
 import com.example.email_sender.service.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,12 +20,12 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     private String from;
 
     @Override
-    public String sendEmail(String to, String subject, String body) {
+    public String sendEmail(ConfirmRegistrationDto info) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
+        message.setTo(info.getToEmail());
+        message.setSubject(info.getSubject());
+        message.setText(info.getBody());
 
         javaMailSender.send(message);
 

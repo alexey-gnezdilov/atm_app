@@ -8,6 +8,7 @@ public class Constants {
     public static final String BASE_URL = "/auth";
     public static final String USER_REGISTRATION_URL = BASE_URL + "/registration";
     public static final String USER_AUTHENTICATION_URL = BASE_URL + "/authentication";
+    public static final String CONFIRMATION_OF_REGISTRATION_URL = BASE_URL + "/reg_confirm";
 
     /**
      * Exception constants.
@@ -58,5 +59,11 @@ public class Constants {
     public static final String DELIMITER = "|";
     public static final String USER_TOKEN = "Токен пользователя ";
     public static final String TOKEN_EXPIRED = " просрочен и был удалён.";
+
+    /**
+     * Integration constants
+     */
+    public static final String CONFIRMATION_REGISTRATION_SUBJECT = "Confirmation registration.";
+    public static final String CONFIRMATION_BODY_MESSAGE = "Follow the link to confirm your registration - http://127.0.0.1:8089/auth/reg_confirm?user_email=";
 
 }

@@ -1,7 +1,9 @@
 package com.example.email_sender.service;
 
+import com.example.email_sender.model.ConfirmRegistrationDto;
+
 public interface EmailSenderService {
 
-    String sendEmail(String to, String subject, String body);
+    String sendEmail(ConfirmRegistrationDto info);
 
 }
