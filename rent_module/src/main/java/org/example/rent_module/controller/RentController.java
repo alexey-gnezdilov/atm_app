@@ -2,6 +2,7 @@ package org.example.rent_module.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.rent_module.model.BookingRequestApartmentFullInfoDto;
+import org.example.rent_module.model.BookingRequestDto;
 import org.example.rent_module.model.LatitudeAndLongitudeDto;
 import org.example.rent_module.model.RentApartmentFullInfoDto;
 import org.example.rent_module.service.CheckTokenSessionService;
@@ -30,24 +31,17 @@ public class RentController {
         return rentService.apartmentRegistration(apartmentInfo, file);
     }
 
-    @GetMapping(CHOOSE_DISCOUNT_URL)
+    @PostMapping(BOOK_APARTMENT_URL)
     public BookingRequestApartmentFullInfoDto bookApartment(
             @RequestHeader(required = false) String token,
-            @RequestParam Long idApartment,
-            @RequestParam(required = false) LocalDateTime start,
-            @RequestParam(required = false) LocalDateTime end) {
-
-        return rentService.bookApartment(token, idApartment, start, end);
+            @RequestBody BookingRequestDto bookingInfo
+            ) {
+        return rentService.bookApartment(token, bookingInfo);
     }
-
-    @GetMapping("/getTime")
-    public LocalDateTime getCurrentDateTime() {
-        return LocalDateTime.now();
-    }
-
 
     @PostMapping(APARTMENTS_BY_LOCATION_URL)
-    public List<RentApartmentFullInfoDto> getApartmentFullInfoByLocation(@RequestBody LatitudeAndLongitudeDto coordinates){
+    public List<RentApartmentFullInfoDto> getApartmentFullInfoByLocation(
+            @RequestBody LatitudeAndLongitudeDto coordinates){
         return rentService.getApartmentFullInfoByLocation(coordinates);
     }
 }

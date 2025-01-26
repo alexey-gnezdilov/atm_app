@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<UserPersonalData, Long> {
     @Query(FIND_USER_PERSONAL_DATA_BY_LOGIN)
     Optional<UserPersonalData> findByLogin(String login);
 
+    Optional<UserPersonalData> findByEmail(String email);
+
     List<UserPersonalData> findUserPersonalDataByTokenIsNotNull();
 
 }

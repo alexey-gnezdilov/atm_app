@@ -8,4 +8,5 @@ public interface AuthService {
 
     UserRegistrationResponseDto userRegistration(UserRegistrationRequestDto user);
     String userAuthentication(UserAuthenticationRequestDto user);
+    String confirmUserRegistrationByEmail(String userEmail);
 }

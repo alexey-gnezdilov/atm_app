@@ -6,7 +6,7 @@ public class RentApartmentConstants {
      * URL's
      */
     public final static String REGISTRATION_APARTMENT_URL = "/registration_apartment";
-    public final static String CHOOSE_DISCOUNT_URL = "/choose_discount";
+    public final static String BOOK_APARTMENT_URL = "/book_apartment";
     public final static String GET_FILE_URL = "/getFile/{id}";
     public final static String APARTMENTS_BY_LOCATION_URL = "/apartments_by_location";
 
@@ -46,6 +46,11 @@ public class RentApartmentConstants {
     public static final String DEFAULT_EMAIL_VERIFICATION = "false";
 
     /**
+     * Booking apartment
+     */
+    public static final String BOOKING_APARTMENT = "booking_apartment";
+
+    /**
      * Integration info
      */
     public static final String INTEGRATION_INFO = "integration_info";
@@ -63,6 +68,8 @@ public class RentApartmentConstants {
     public static final String APARTMENT_ATTACHMENT_SEQUENCE_NAME = APARTMENT_ATTACHMENT + _SEQUENCE;
     public static final String USER_PERSONAL_SEQUENCE = USER_PERSONAL_DATA + SEQUENCE;
     public static final String USER_PERSONAL_SEQUENCE_NAME = USER_PERSONAL_DATA + _SEQUENCE;
+    public static final String BOOKING_APARTMENT_SEQUENCE = BOOKING_APARTMENT + SEQUENCE;
+    public static final String BOOKING_APARTMENT_SEQUENCE_NAME = BOOKING_APARTMENT + _SEQUENCE;
 
     /**
      * Mapper constants

@@ -17,6 +17,15 @@ public class BookingInfoForProductDto {
     private String message;
     private String login;
     private String email;
-    private LocalDateTime registrationDate;
+    private String userCityFrom;
+    private LocalDateTime addressRegistrationDate;
+    private LocalDateTime userRegistrationDate;
+    private LocalDateTime birthDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private int bookingAmount;
+    private String promocode;
+    private boolean foreignCitizen;
+    private boolean byCash;
 
 }

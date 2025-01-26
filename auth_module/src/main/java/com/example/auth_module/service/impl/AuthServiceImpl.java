@@ -54,9 +54,20 @@ public class AuthServiceImpl implements AuthService {
         if (!decoder(userPersonalData.getPassword()).equals(user.getPassword())){
             throw new UserExistsException(INCORRECT_PASSWORD, CODE_604);
         }
+        if (!userPersonalData.isEmailVerification()) {
+            throw new UserExistsException(UNCONFIRMED_EMAIL, CODE_607);
+        }
         userPersonalData.setToken(TokenUtils.generateToken());
         userRepository.save(userPersonalData);
-        return USER_AUTHORIZATION_SUCCESS;
+        return USER_AUTHENTICATION_SUCCESS;
+    }
+
+    @Override
+    public String confirmUserRegistrationByEmail(String userEmail) {
+        UserPersonalData userPersonalData = userRepository.findByEmail(userEmail).orElseThrow(() -> new UserExistsException(INCORRECT_EMAIL, CODE_606));
+        userPersonalData.setEmailVerification(true);
+        userRepository.save(userPersonalData);
+        return SUCCESS_REGISTRATION;
     }
 
     private UserRegistrationResponseDto prepareResponseDto(UserPersonalData user) {
@@ -68,6 +79,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private UserPersonalData prepareUserForDb(UserRegistrationRequestDto user) {
-        return new UserPersonalData(user.getLogin(), encoder(user.getPassword()), user.getEmail());
+        return new UserPersonalData(
+                user.getLogin(),
+                encoder(user.getPassword()),
+                user.getEmail(),
+                user.getBirthDate(),
+                user.isForeignCitizen(),
+                user.getCityFrom());
     }
 }

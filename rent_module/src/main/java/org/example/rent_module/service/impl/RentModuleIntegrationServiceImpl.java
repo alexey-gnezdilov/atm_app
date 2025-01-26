@@ -6,7 +6,7 @@ import org.example.rent_module.model.BookingInfoForProductDto;
 import org.example.rent_module.model.LatitudeAndLongitudeDto;
 import org.example.rent_module.model.geo_response.GeoResponse;
 import org.example.rent_module.repository.IntegrationInfoRepository;
-import org.example.rent_module.service.IntegrationService;
+import org.example.rent_module.service.RentModuleIntegrationService;
 import org.example.rent_module.util.Base64EncodeDecode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -20,7 +20,7 @@ import static org.example.rent_module.constants.RentApartmentConstants.KEY;
 
 @Service
 @RequiredArgsConstructor
-public class IntegrationServiceImpl implements IntegrationService {
+public class RentModuleIntegrationServiceImpl implements RentModuleIntegrationService {
 
     @Value("${integration.key}")
     private String INTEGRATION_KEY;
@@ -31,7 +31,7 @@ public class IntegrationServiceImpl implements IntegrationService {
     @Override
     public String requestToProductModule() {
         return restTemplate.exchange(
-                "http://localhost:8084/get_version",
+                "http://localhost:8089/get_version",
                 HttpMethod.GET,
                 new HttpEntity<>(null,buildHeadersToRequest()),
                 String.class
@@ -51,7 +51,7 @@ public class IntegrationServiceImpl implements IntegrationService {
     @Override
     public String requestToProductModuleForDiscount(BookingInfoForProductDto info) {
         return restTemplate.exchange(
-                "http://localhost:8084/get_discount",
+                "http://localhost:8089/get_discount",
                 HttpMethod.POST,
                 new HttpEntity<>(info,buildHeadersToRequest()),
                 String.class

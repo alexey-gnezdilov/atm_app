@@ -30,11 +30,19 @@ public class UserPersonalData {
     private boolean emailVerification;
 
     private LocalDateTime registrationDate;
+    private LocalDateTime birthDate;
+    private int bookingAmount;
+    private boolean foreignCitizen;
+    private String cityFrom;
 
-    public UserPersonalData(String login, String password, String email) {
+    public UserPersonalData(String login, String password, String email, LocalDateTime birthDate, boolean foreignCitizen, String cityFrom) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.registrationDate = LocalDateTime.now();
+        this.birthDate = birthDate;
+        this.bookingAmount = 0;
+        this.foreignCitizen = foreignCitizen;
+        this.cityFrom = cityFrom;
     }
 }

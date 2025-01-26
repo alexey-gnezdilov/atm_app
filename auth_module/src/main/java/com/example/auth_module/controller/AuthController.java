@@ -21,14 +21,13 @@ public class AuthController {
     }
 
     @PostMapping(USER_AUTHENTICATION_URL)
-    public String userAuthorization(@RequestBody UserAuthenticationRequestDto user) {
+    public String userAuthentication(@RequestBody UserAuthenticationRequestDto user) {
         return authService.userAuthentication(user);
     }
 
     @GetMapping(CONFIRMATION_OF_REGISTRATION_URL)
-    public String confirmUserRegistration(@RequestParam(value = "user_email") String userEmail) {
-        String str = userEmail;
-        return "SUCCESS REGISTRATION";
+    public String confirmUserRegistration(@RequestParam(value = USER_EMAIL) String userEmail) {
+        return authService.confirmUserRegistrationByEmail(userEmail);
     }
 
 }

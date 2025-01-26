@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.rent_module.annotation.Default;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
@@ -31,11 +32,20 @@ public class UserPersonalData {
     private boolean emailVerification;
 
     private LocalDateTime registrationDate;
+    private LocalDateTime birthDate;
+    private int bookingAmount;
+    private boolean foreignCitizen;
+    private String cityFrom;
 
-    public UserPersonalData(String login, String password, String email) {
+    @Default
+    public UserPersonalData(String login, String password, String email, LocalDateTime birthDate, boolean foreignCitizen, String cityFrom) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.registrationDate = LocalDateTime.now();
+        this.birthDate = birthDate;
+        this.bookingAmount = 0;
+        this.foreignCitizen = foreignCitizen;
+        this.cityFrom = cityFrom;
     }
 }
